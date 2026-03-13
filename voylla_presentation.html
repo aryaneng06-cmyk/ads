@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voylla: Advanced Search Marketing Strategy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme Brand Colors (Dusty Rose & Warm Blush) */
+            --brand-magenta: #b81d4b;
+            --brand-gold: #c29b4e;
+            --bg-color: #fff5f2;
+            
+            /* High Contrast Typography */
+            --text-primary: #1e1e24;
+            --text-secondary: rgba(30, 30, 36, 0.75);
+            
+            /* Light Glassmorphism */
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --glass-highlight: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+            --blur-amount: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Soft Animated Background Orbs for Light Liquid Effect */
+        .ambient-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+            background: #fff0ea;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            /* Removed heavy blur filter for performance */
+            opacity: 0.6;
+            animation: drift 25s infinite ease-in-out alternate;
+            will-change: transform;
+        }
+
+        .orb-rose {
+            background: radial-gradient(circle, #fcb6a4 0%, transparent 60%);
+            width: 70vw;
+            height: 70vw;
+            top: -20vh;
+            left: -10vw;
+            animation-delay: 0s;
+        }
+
+        .orb-cream {
+            background: radial-gradient(circle, #f5e4d7 0%, transparent 60%);
+            width: 60vw;
+            height: 60vw;
+            bottom: -15vh;
+            right: -10vw;
+            animation-delay: -7s;
+        }
+
+        .orb-white {
+            background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+            width: 80vw;
+            height: 80vw;
+            top: 30vh;
+            left: 20vw;
+            animation-delay: -15s;
+            opacity: 0.8;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(3%, 5%) scale(1.05); }
+            66% { transform: translate(-2%, 8%) scale(0.95); }
+            100% { transform: translate(-4%, -2%) scale(1); }
+        }
+
+        /* Presentation Container */
+        #presentation-container {
+            width: 92vw;
+            max-width: 1400px;
+            height: 82vh;
+            max-height: 900px;
+            position: relative;
+            perspective: 1200px;
+        }
+
+        /* Light Liquid Glass Slide Settings */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-amount)) saturate(180%);
+            -webkit-backdrop-filter: blur(var(--blur-amount)) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid var(--glass-highlight);
+            border-left: 1px solid var(--glass-highlight);
+            border-radius: 32px;
+            box-shadow: var(--glass-shadow);
+            padding: 4rem 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden; /* Prevent 24 backdrop-filters rendering simultaneously */
+            pointer-events: none;
+            overflow-y: auto;
+            transform: translateY(40px) scale(0.97);
+            transition: opacity 0.7s cubic-bezier(0.19, 1, 0.22, 1), transform 0.7s cubic-bezier(0.19, 1, 0.22, 1), visibility 0.7s;
+            will-change: transform, opacity;
+        }
+        
+        /* Custom scrollbar for light theme */
+        .slide::-webkit-scrollbar {
+            width: 8px;
+        }
+        .slide::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.02); 
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .slide::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.15); 
+            border-radius: 10px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        .slide::-webkit-scrollbar-thumb:hover {
+            background: rgba(0,0,0,0.25); 
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Staggered Content Animation classes */
+        .slide.active .stagger-1 { animation: slideUpFade 0.7s forwards; animation-delay: 0.1s; opacity: 0; }
+        .slide.active .stagger-2 { animation: slideUpFade 0.7s forwards; animation-delay: 0.2s; opacity: 0; }
+        .slide.active .stagger-3 { animation: slideUpFade 0.7s forwards; animation-delay: 0.3s; opacity: 0; }
+        .slide.active .stagger-4 { animation: slideUpFade 0.7s forwards; animation-delay: 0.4s; opacity: 0; }
+        
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography & Layout */
+        .slide-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+            letter-spacing: -1.5px;
+            line-height: 1.2;
+        }
+
+        .slide-subtitle {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--brand-magenta);
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Rich UI Components for Light Theme */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.5), 0 4px 15px rgba(0,0,0,0.02);
+            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+        }
+
+        .glass-panel:hover {
+            background: rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.9);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.7), 0 8px 25px rgba(212, 163, 149, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .data-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .data-card:hover {
+            background: rgba(255,255,255,0.7);
+            border-color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 163, 149, 0.15);
+        }
+
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--brand-magenta);
+            border-radius: 4px 0 0 4px;
+        }
+
+        .data-card-gold::before { background: var(--brand-gold); }
+
+        .data-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--brand-magenta);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .data-value {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .metric-pill {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(212, 163, 149, 0.15);
+            border: 1px solid rgba(212, 163, 149, 0.4);
+            color: var(--brand-magenta);
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .highlight-text {
+            color: var(--brand-magenta);
+            font-weight: 600;
+        }
+
+        /* Styled Lists */
+        ul.custom-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        ul.custom-list li {
+            position: relative;
+            padding-left: 2rem;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        ul.custom-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 8px;
+            height: 8px;
+            background: var(--brand-magenta);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(184, 29, 75, 0.3);
+        }
+
+        ul.custom-list li strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Floating Controls Bar (White Glass Theme) */
+        #controls-bar {
+            position: fixed;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-top: 1px solid #ffffff;
+            border-radius: 50px;
+            padding: 0.5rem 1.25rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08), inset 0 0 20px rgba(255,255,255,0.6);
+            z-index: 100;
+        }
+
+        .control-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.3s ease;
+            z-index: -1;
+        }
+
+        .control-btn:hover::before {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .control-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .control-btn:active {
+            transform: scale(0.95);
+        }
+
+        .control-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+            transition: filter 0.3s;
+        }
+
+        .control-btn:hover svg {
+            filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .slide-indicator {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 1px;
+            min-width: 70px;
+            text-align: center;
+            padding: 0 0.5rem;
+        }
+
+        .control-divider {
+            width: 1px; 
+            height: 20px; 
+            background: rgba(0,0,0,0.1); 
+            margin: 0 0.2rem;
+        }
+
+        /* ----- Advanced CSS Structure Tree (Slide 3) ----- */
+        .tree-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .tree-node {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(212, 163, 149, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tree-node-title {
+            color: var(--brand-magenta);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .tree-node-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .tree-root {
+            margin-bottom: 3rem;
+        }
+
+        .tree-root::after {
+            content: '';
+            position: absolute;
+            bottom: -3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 3rem;
+            background: var(--brand-gold);
+            z-index: 1;
+        }
+
+        .tree-branches {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            position: relative;
+            width: 100%;
+        }
+
+        .tree-branches::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: calc(16.6% + 2rem);
+            right: calc(16.6% + 2rem);
+            height: 2px;
+            background: var(--brand-gold);
+            z-index: 1;
+        }
+
+        .tree-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .tree-branch::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 2rem;
+            background: var(--brand-gold);
+            z-index: 1;
+        }
+
+        .tree-branch .tree-node {
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 280px;
+        }
+        
+        .tree-leaves {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 2rem;
+            position: relative;
+            width: 100%;
+            align-items: center;
+        }
+        
+        .tree-leaves::before {
+            content: '';
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: calc(100% + 2rem);
+            background: rgba(194, 155, 78, 0.3); /* Lighter gold line */
+            z-index: 1;
+        }
+        
+        .tree-leaf {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 240px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        @media screen and (max-width: 1024px) {
+            .slide { padding: 3rem; }
+            .slide-title { font-size: 2.5rem; }
+            .slide-subtitle { font-size: 1.3rem; }
+            #presentation-container { width: 95vw; height: 88vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Light Animated Liquid Orbs Background -->
+    <div class="ambient-bg">
+        <div class="orb orb-rose"></div>
+        <div class="orb orb-cream"></div>
+        <div class="orb orb-white"></div>
+    </div>
+
+    <!-- Presentation Viewport -->
+    <div id="presentation-container"></div>
+
+    <!-- Light Glassmorphism SPA Controls -->
+    <div id="controls-bar">
+        <button class="control-btn" id="btn-prev" aria-label="Previous Slide">
+            <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+        </button>
+        <span class="slide-indicator" id="slide-indicator">1 / 25</span>
+        <button class="control-btn" id="btn-next" aria-label="Next Slide">
+            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+        </button>
+        <div class="control-divider"></div>
+        <button class="control-btn" id="btn-fullscreen" aria-label="Toggle Fullscreen">
+            <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+        </button>
+    </div>
+
+    <script>
+        /**
+         * 17-Slide Presentation Data Matrix (Light Theme)
+         */
+        const presentationData = [
+            {
+                id: "slide-1",
+                title: "Voylla: Advanced Search Marketing Strategy",
+                subtitle: "Driving Real Business Outcomes through Intent-Based Search",
+                content: `
+                    <div class="glass-panel stagger-1">
+                        <div class="data-label">Objective Statement</div>
+                        <div class="data-value" style="font-size: 1.4rem; font-weight: 400;">To systematically increase online sales and conversions for Voylla while aggressively capturing market share from direct competitors using highly segmented Google Search Ads.</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-2",
+                title: "Comprehensive Brand Analysis",
+                subtitle: "Market Positioning & Scale",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Brand Overview</div>
+                            <div class="data-value">India's leading fashion and artificial jewelry brand, offering over 45,000 unique designs. Focuses on premium, 100% skin-friendly (nickel and lead-free) craftsmanship.</div>
+                        </div>
+                        <div class="data-card data-card-gold">
+                            <div class="data-label">Positioning & Product Depth</div>
+                            <div class="data-value">"Designer Artificial." Bridging the massive gap between cheap imitation pieces and unaffordable fine jewelry.<br><br>Beyond earrings, the catalog spans elaborate bridal sets, oxidised chokers, Kundan heritage pieces, and a massive, untapped market for men's accessories (DARE by Voylla).</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem; border-color: rgba(184, 29, 75, 0.4);">
+                        <div class="data-label" style="color: var(--brand-magenta);">Problem Statement</div>
+                        <div class="data-value">How to effectively scale online sales profitably in a highly saturated market, while defending core brand search volume and siphoning high-intent traffic from established direct competitors.</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-3",
+                title: "Account Structure Tree",
+                subtitle: "Visual Hierarchy of Search Intent",
+                content: `
+                    <div class="tree-container stagger-1">
+                        <div class="tree-node tree-root">
+                            <div class="tree-node-title">Voylla Google Ads Account</div>
+                            <div class="tree-node-subtitle">Master Engine</div>
+                        </div>
+                        
+                        <div class="tree-branches">
+                            <!-- Branch 1: Brand -->
+                            <div class="tree-branch stagger-2">
+                                <div class="tree-node">
+                                    <div class="tree-node-title">Brand Campaign</div>
+                                    <div class="tree-node-subtitle">Defense & ROI</div>
+                                </div>
+                                <div class="tree-leaves">
+                                    <div class="tree-leaf">Core Brand</div>
+                                    <div class="tree-leaf">Earrings</div>
+                                    <div class="tree-leaf">Necklace & Sets</div>
+                                    <div class="tree-leaf" style="background: rgba(184, 29, 75, 0.1); border-color: rgba(184, 29, 75, 0.3); color: var(--brand-magenta);">1 RSA Ad Per Group</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Branch 2: Competitor -->
+                            <div class="tree-branch stagger-3">
+                                <div class="tree-node">
+                                    <div class="tree-node-title">Competitor Campaign</div>
+                                    <div class="tree-node-subtitle">Market Share Capture</div>
+                                </div>
+                                <div class="tree-leaves">
+                                    <div class="tree-leaf">Sukkhi</div>
+                                    <div class="tree-leaf">Zaveri Pearls</div>
+                                    <div class="tree-leaf" style="background: rgba(184, 29, 75, 0.1); border-color: rgba(184, 29, 75, 0.3); color: var(--brand-magenta);">1 RSA Ad Per Group</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Branch 3: Generic -->
+                            <div class="tree-branch stagger-4">
+                                <div class="tree-node">
+                                    <div class="tree-node-title">Generic Campaign</div>
+                                    <div class="tree-node-subtitle">Top of Funnel Discovery</div>
+                                </div>
+                                <div class="tree-leaves">
+                                    <div class="tree-leaf">Core Category</div>
+                                    <div class="tree-leaf">Earrings</div>
+                                    <div class="tree-leaf">Necklace & Sets</div>
+                                    <div class="tree-leaf">Bridal & Occasion</div>
+                                    <div class="tree-leaf">Bangles</div>
+                                    <div class="tree-leaf" style="background: rgba(184, 29, 75, 0.1); border-color: rgba(184, 29, 75, 0.3); color: var(--brand-magenta);">1 RSA Ad Per Group</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-4",
+                title: "Audience & Geographic Targeting",
+                subtitle: "Layered Precision Targeting",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Geographic Targeting</div>
+                            <div class="data-value"><strong>Pan-India.</strong> The campaign targets the entire nation to maximize reach across Tier 1, 2, and 3 cities where artificial jewelry demand is surging.</div>
+                        </div>
+                        <div class="data-card data-card-gold">
+                            <div class="data-label">Audience Layering</div>
+                            <div class="data-value">Targeting "Shopping Enthusiasts" and 11 distinct In-Market segments (e.g., Jewelry & Watches, Wedding Planning).</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="data-label">Strategic Reasoning</div>
+                        <div class="data-value">By layering these audiences on Search campaigns with the "Observation" setting, the algorithm gathers data on high-intent user profiles, allowing for aggressive bid adjustments when a user actively in the market for jewelry searches for our keywords.</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-5",
+                title: "Campaign Segmentation Logic",
+                subtitle: "Strict Intent Funneling",
+                content: `
+                    <div class="glass-panel stagger-1">
+                        <div class="data-label">Structure Breakdown</div>
+                        <div class="data-value" style="margin-bottom: 1.5rem;">The account is segmented strictly by user intent into three campaigns: Brand, Competitor, and Generic.</div>
+                        <ul class="custom-list">
+                            <li><strong>1. Brand (Defense):</strong> Targets users actively searching for "Voylla". Goal: High ROI, protecting existing brand equity, and preventing competitor conquesting.</li>
+                            <li><strong>2. Competitor (Attack):</strong> Targets users searching for "Sukkhi" or "Zaveri Pearls". Goal: Aggressive market share capture by positioning Voylla as a higher-quality alternative.</li>
+                            <li><strong>3. Generic (Discovery):</strong> Targets broad queries like "artificial jewelry online". Goal: Top-of-funnel customer acquisition and finding new converting search terms.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: "slide-6",
+                title: "Keyword Grouping & Ad Group Structure",
+                subtitle: "Maximizing Ad Relevance",
+                content: `
+                    <div class="glass-panel stagger-1">
+                        <div class="data-grid" style="grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div>
+                                <div class="data-label">Ad Group Structure</div>
+                                <div class="data-value">Campaigns are broken down into hyper-specific Ad Groups based on product categories (e.g., Earrings, Necklaces, Bangles).</div>
+                            </div>
+                            <div>
+                                <div class="data-label">Grouping Logic</div>
+                                <div class="data-value">Keywords are grouped tightly by product type. <em>Reasoning:</em> A user searching for "Voylla choker" must see an ad headline specifically about chokers, landing on a choker page. This maximizes Quality Score, Ad Relevance, and lowers CPC.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="data-grid stagger-2">
+                        <div class="data-card data-card-gold">
+                            <div class="data-label">Match Types Strategy</div>
+                            <ul class="custom-list" style="gap: 0.8rem; margin-top: 0.5rem;">
+                                <li><strong>Exact Match [keyword]:</strong> High-converting, strictly defined terms to lock in predictable CPA.</li>
+                                <li><strong>Phrase Match "keyword":</strong> Capture long-tail variations while maintaining core intent.</li>
+                                <li><strong>Broad Match:</strong> Selective discovery in Generic campaigns.</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-7",
+                title: "Bidding Strategy Selection & Justification",
+                subtitle: "Algorithmic Control & Spend Efficiency",
+                content: `
+                    <div class="glass-panel stagger-1">
+                        <ul class="custom-list" style="gap: 1.8rem;">
+                            <li><strong>Brand Campaign -> Maximize Conversions (tCPA ₹300):</strong> Since these users already know Voylla, conversion rates are high. Target CPA ensures the algorithm acquires these guaranteed sales profitably without overspending.</li>
+                            <li><strong>Competitor Campaign -> Maximize Clicks (Max CPC ₹45):</strong> Competitor terms have lower initial Quality Scores. Max Clicks forces aggressive impression share to intercept traffic. The ₹45 CPC cap ensures we win auctions without paying absurd premiums for a rival's branded search.</li>
+                            <li><strong>Generic Campaign -> Max Clicks (Transition to tROAS):</strong> Generic terms have massive volume but varying intent. We use Max Clicks to feed the algorithm initial traffic data. After 30 conversions, it pivots to Target ROAS to focus purely on revenue-driving searches.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: "slide-8",
+                title: "Global Ad Extensions Strategy",
+                subtitle: "Dominating the Search Page",
+                content: `
+                    <div class="glass-panel stagger-1">
+                        <ul class="custom-list" style="gap: 1.2rem;">
+                            <li><strong>Sitelinks (6):</strong> New Arrivals, Best Sellers, Wedding Store, Earrings Collection, Necklace Sets, Bangles & Bracelets.</li>
+                            <li><strong>Callouts (11):</strong> FreeShipping Across India, 5-Year Warranty, Lightweight & Durable, Free Shipping Above ₹499, Easy 7 Day Returns, 45000+ Designs, 100% Secure Payments.</li>
+                            <li><strong>Structured Snippets:</strong> Styles (Kundan, Oxidised, Polki); Types (Earrings, Necklace Sets, Bangles & Bracelets).</li>
+                        </ul>
+                        <div class="data-value" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.1);">
+                            <strong>Reasoning:</strong> High extension usage maximizes SERP real estate, drastically improves CTR, and physically pushes competitor organic results further down the page.
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-9",
+                title: "DEEP DIVE",
+                subtitle: "Budget Allocation & Funnel Economics",
+                content: `
+                    <div class="metric-pill stagger-1" style="font-size: 1.3rem;">Total Daily Investment: ~₹5,743.00/day</div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1rem;">
+                        <ul class="custom-list" style="gap: 1.8rem;">
+                            <li><strong>Brand Protection (45% | ₹2,631/day):</strong> The lion's share of the budget is allocated to defending the core. <em>Economics:</em> These clicks yield the highest ROAS and lowest CPA, serving as the financial backbone of the account.</li>
+                            <li><strong>Generic Discovery (35% | ₹2,000/day):</strong> <em>Economics:</em> While CTR (2-5%) and initial ROAS will be lower, this is the engine for new customer acquisition. It feeds the top of the funnel to prevent brand stagnation.</li>
+                            <li><strong>Competitor Conquesting (20% | ₹1,111/day):</strong> <em>Economics:</em> A calculated risk allocation. We pay a premium CPC to intercept users, focusing on Customer Lifetime Value (LTV) rather than immediate high-margin returns.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: "slide-10",
+                title: "The Brand Campaign",
+                subtitle: "Defense Strategy Execution",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Bidding Strategy</div>
+                            <div class="data-value">Max Conversions (tCPA ₹300.00).</div>
+                        </div>
+                        <div class="data-card data-card-gold">
+                            <div class="data-label">Total Keywords</div>
+                            <div class="data-value">58 Brand Keywords.</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="metric-pill" style="margin-bottom:0;">Daily Budget: ₹2,631.81/day</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-11",
+                title: "Brand Ad Group - Core Brand",
+                subtitle: "Navigational Intent",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Keywords (34)</div>
+                            <div class="data-value" style="font-family: monospace; font-size: 1rem;">[voylla jewellery]<br>"voylla online site"<br>"voylla fashions"</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="data-label">Top Headlines</div>
+                        <div class="data-value" style="margin-bottom: 1rem;">Voylla Official Store | Shop Voylla Jewellery Online | Voylla Fashion Jewellery</div>
+                        <div class="data-label">Top Descriptions</div>
+                        <div class="data-value">Explore 45000+ jewellery designs online. Free shipping above ₹499. Easy 7 day returns.</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-12",
+                title: "Brand Ad Groups - Earrings & Necklaces",
+                subtitle: "Category Driven Brand Intent",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Earrings (44 Keywords)</div>
+                            <div class="data-value" style="font-family: monospace; font-size: 0.9rem; margin-bottom: 1rem;">"voylla jhumka earrings"<br>voylla oxidised earrings</div>
+                            <div class="data-label" style="font-size: 0.8rem; color: #1e1e24;">Headlines</div>
+                            <div class="data-value" style="font-size: 1rem;">Voylla Earrings Online, Voylla Kundan Earrings</div>
+                        </div>
+                        <div class="data-card data-card-gold">
+                            <div class="data-label">Necklace & Sets (23 Keywords)</div>
+                            <div class="data-value" style="font-family: monospace; font-size: 0.9rem; margin-bottom: 1rem;">"voylla necklace set"<br>[voylla choker]</div>
+                            <div class="data-label" style="font-size: 0.8rem; color: #1e1e24;">Headlines</div>
+                            <div class="data-value" style="font-size: 1rem;">Voylla Necklace Sets Online, Designer Necklace Sets</div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-13",
+                title: "The Competitor Campaign",
+                subtitle: "Strategic Conquesting Execution",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Bidding Strategy</div>
+                            <div class="data-value">Maximize Clicks (Max CPC bid limit of ₹45.00).</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="metric-pill" style="margin-bottom:0;">Daily Budget: ₹1,111.88/day</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-14",
+                title: "Competitor Ad Group - Sukkhi",
+                subtitle: "Market Share Interception",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Keywords (23)</div>
+                            <div class="data-value" style="font-family: monospace; font-size: 1rem;">"sukkhi jewellery"<br>[sukkhi bridal jewellery]<br>sukkhi pearl necklace set</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="data-label">Top Headlines</div>
+                        <div class="data-value" style="margin-bottom: 1rem;">Voylla Designer Jewellery | 100% Skin-Friendly Pieces | Upgrade From Basic Imitation</div>
+                        <div class="data-label">Top Descriptions</div>
+                        <div class="data-value">Tired of skin irritation? Shop Voylla's 100% hypoallergenic, designer jewellery sets.</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-15",
+                title: "Competitor Ad Group - Zaveri Pearls",
+                subtitle: "Premium Alternative Positioning",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Keywords (25)</div>
+                            <div class="data-value" style="font-family: monospace; font-size: 1rem;">"zaveri pearls choker necklace"<br>[zaveri pearls kundan set]<br>zaveri artificial jewellery</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="data-label">Top Headlines</div>
+                        <div class="data-value" style="margin-bottom: 1rem;">Modern Heritage Jewellery | Studio Voylla Exclusive | Handcrafted Kundan Sets</div>
+                        <div class="data-label">Top Descriptions</div>
+                        <div class="data-value">Upgrade your traditional look. Discover Voylla's handcrafted, modern ethnic designs. Don't settle for ordinary.</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-16",
+                title: "DEEP DIVE",
+                subtitle: "Competitor Auction Insights Strategy",
+                content: `
+                    <div class="glass-panel stagger-1">
+                        <ul class="custom-list" style="gap: 1.5rem;">
+                            <li><strong>The Metric:</strong> We will actively monitor the 'Search Impression Share' and 'Outranking Share' reports specifically against Sukkhi and Zaveri Pearls domains.</li>
+                            <li><strong>The Strategy:</strong> The goal is not 100% impression share (which drains budget), but rather a strategic 30-40% outranking share to ensure constant visibility.</li>
+                            <li><strong>The Defensive Playbook:</strong> If Zaveri Pearls begins bidding on Voylla's brand terms in retaliation, we will utilize the 'Target Impression Share' bidding strategy (Absolute Top) on our Brand Campaign to aggressively block them from showing above us.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: "slide-17",
+                title: "The Generic Campaign",
+                subtitle: "Top of Funnel Discovery Execution",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Bidding Strategy</div>
+                            <div class="data-value">Maximize Clicks (Discovery phase).</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="metric-pill" style="margin-bottom:0;">Daily Budget: ₹2,000.00/day</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-18",
+                title: "Generic Ad Group - Core Category",
+                subtitle: "Broad Intent Capture",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Keywords (45)</div>
+                            <div class="data-value" style="font-family: monospace; font-size: 1rem;">[artificial jewellery]<br>[imitation jewellery]<br>fashion jewellery</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="data-label">Top Headlines</div>
+                        <div class="data-value" style="margin-bottom: 1rem;">Artificial Jewellery Online | Best Imitation Jewellery | Jewellery From ₹299</div>
+                        <div class="data-label">Top Descriptions</div>
+                        <div class="data-value">Shop India's best artificial & imitation jewellery online. 45000+ designs at best prices.</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-19",
+                title: "Generic Ad Group - Earrings",
+                subtitle: "Volume Discovery",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Keywords (36)</div>
+                            <div class="data-value" style="font-family: monospace; font-size: 1rem;">[earrings online]<br>earrings for women<br>jhumka earrings online</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="data-label">Top Headlines</div>
+                        <div class="data-value" style="margin-bottom: 1rem;">Earrings Online India | Artificial Earrings Online | Jhumka Earrings Online</div>
+                        <div class="data-label">Top Descriptions</div>
+                        <div class="data-value">Explore 1000+ earring designs for every occasion. Jaipur crafted earrings trusted by millions of women.</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-20",
+                title: "Generic Ad Group - Necklace & Sets",
+                subtitle: "AOV Discovery",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Keywords (51)</div>
+                            <div class="data-value" style="font-family: monospace; font-size: 1rem;">[necklace set online]<br>jewellery set online<br>choker necklace online</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="data-label">Top Headlines</div>
+                        <div class="data-value" style="margin-bottom: 1rem;">Buy Necklace Sets Online | Kundan Necklace Set | Necklace For Lehenga</div>
+                        <div class="data-label">Top Descriptions</div>
+                        <div class="data-value">Shop India's best artificial & imitation necklace sets online. Chokers, pendants, kundan.</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-21",
+                title: "Generic Ad Group - Bridal & Occasion",
+                subtitle: "Wedding Season Funnel",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Keywords (51)</div>
+                            <div class="data-value" style="font-family: monospace; font-size: 1rem;">[bridal jewellery set]<br>dulhan jewellery set<br>[wedding jewellery]</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="data-label">Top Headlines</div>
+                        <div class="data-value" style="margin-bottom: 1rem;">Buy Bridal Jewellery Online | Artificial Bridal Set | Dulhan Jewellery Online</div>
+                        <div class="data-label">Top Descriptions</div>
+                        <div class="data-value">From mehndi to reception find perfect bridal jewellery at Voylla. Up to 55% off today.</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-22",
+                title: "Generic Ad Group - Bangles & Bracelets",
+                subtitle: "Accessory Funnel",
+                content: `
+                    <div class="data-grid stagger-1">
+                        <div class="data-card">
+                            <div class="data-label">Keywords (51)</div>
+                            <div class="data-value" style="font-family: monospace; font-size: 1rem;">[bangles online india]<br>artificial bangles online<br>kada for women</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel stagger-2" style="margin-top: 1.5rem;">
+                        <div class="data-label">Top Headlines</div>
+                        <div class="data-value" style="margin-bottom: 1rem;">Bangles Online India | Artificial Bangles Online | Kada For Women Online</div>
+                        <div class="data-label">Top Descriptions</div>
+                        <div class="data-value">Shop India's best artificial & imitation bangles online. Kadas, cuffs, sets at best prices.</div>
+                    </div>
+                `
+            },
+            {
+                id: "slide-23",
+                title: "DEEP DIVE",
+                subtitle: "Advanced Optimization: The SQR Flywheel",
+                content: `
+                    <div class="glass-panel stagger-1">
+                        <ul class="custom-list" style="gap: 1.2rem;">
+                            <li><strong>The Search Query Report (SQR) Flywheel:</strong> This is the core weekly optimization engine.</li>
+                            <li><strong>Harvesting:</strong> We use the Broad and Phrase match keywords in the ₹2,000/day Generic campaign as a net. When the SQR identifies a highly profitable long-tail search term, we "harvest" it by moving it into a dedicated Exact Match ad group for strict bid control.</li>
+                            <li><strong>Sculpting:</strong> Proactive negative keyword sculpting is essential. We will continuously add negative terms (e.g., "wholesale", "cheap plastic", "used") to ensure the budget is strictly allocated to high-intent retail buyers.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: "slide-24",
+                title: "DEEP DIVE",
+                subtitle: "Conversion Rate Optimization (CRO) & Landing Pages",
+                content: `
+                    <div class="glass-panel stagger-1">
+                        <ul class="custom-list" style="gap: 1.2rem;">
+                            <li><strong>The Post-Click Experience:</strong> Getting the click is only 50% of the equation. ROI is determined by the landing page.</li>
+                            <li><strong>URL Mapping:</strong> Ad groups are strictly mapped to relevant URLs. (e.g., The "Zaveri Pearls Kundan" competitor ad drives traffic exclusively to Voylla's Kundan collection page, never the homepage, reducing bounce rate).</li>
+                            <li><strong>Mobile-First UX:</strong> Because earrings and fast-fashion jewelry are heavily driven by mobile impulse buys, page load speed and a frictionless "Add to Cart" mobile interface are critical to making the ₹300 tCPA viable.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: "slide-25",
+                title: "Summary & Execution Roadmap",
+                subtitle: "Strategic Rollout",
+                content: `
+                    <div class="glass-panel stagger-1" style="border-left: 6px solid var(--brand-magenta);">
+                        <ul class="custom-list">
+                            <li><strong>Phase 1 (Days 1-14):</strong> Launch all campaigns. Brand campaign ensures immediate ROAS baseline. Competitor & Generic campaigns gather search query data via Max Clicks.</li>
+                            <li><strong>Phase 2 (Days 15-30):</strong> Execute the SQR Flywheel. Aggressive negative keyword mapping from search terms report. Adjust Max CPC limits based on Auction Insights.</li>
+                            <li><strong>Phase 3 (Day 30+):</strong> Transition Generic campaign to Target ROAS (tROAS) bidding to scale conversions automatically based on the profitability data acquired in Phase 1.</li>
+                        </ul>
+                    </div>
+                `
+            }
+        ];
+
+        // --- JavaScript Single Page App Controller ---
+        
+        const container = document.getElementById('presentation-container');
+        const indicator = document.getElementById('slide-indicator');
+        let currentSlideIndex = 0;
+
+        function initApp() {
+            // Generate HTML for all 17 slides
+            presentationData.forEach((slideData, index) => {
+                const slideEl = document.createElement('div');
+                slideEl.className = 'slide';
+                slideEl.id = slideData.id;
+                
+                // Construct standard staggered header
+                let html = `
+                    <h2 class="slide-title stagger-1">${slideData.title}</h2>
+                `;
+                
+                if (slideData.subtitle) {
+                    html += `<h3 class="slide-subtitle stagger-2">${slideData.subtitle}</h3>`;
+                }
+                
+                html += `<div class="content-wrapper">${slideData.content}</div>`;
+                
+                slideEl.innerHTML = html;
+                container.appendChild(slideEl);
+            });
+            
+            // Activate Slide 1
+            renderSlide(currentSlideIndex);
+        }
+
+        function renderSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            if (index < 0 || index >= slides.length) return;
+            
+            // Remove active from all
+            slides.forEach(s => s.classList.remove('active'));
+            
+            // Apply to target
+            currentSlideIndex = index;
+            slides[currentSlideIndex].classList.add('active');
+            
+            // Update UI State
+            indicator.textContent = `${currentSlideIndex + 1} / ${presentationData.length}`;
+        }
+
+        // Navigation Actions
+        function nextSlide() { renderSlide(currentSlideIndex + 1); }
+        function prevSlide() { renderSlide(currentSlideIndex - 1); }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch((err) => {
+                    console.log(`Fullscreen Error: ${err.message}`);
+                });
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+
+        // Event Binding
+        document.getElementById('btn-next').addEventListener('click', nextSlide);
+        document.getElementById('btn-prev').addEventListener('click', prevSlide);
+        document.getElementById('btn-fullscreen').addEventListener('click', toggleFullScreen);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'f') toggleFullScreen();
+        });
+
+        // Boot
+        initApp();
+        
+    </script>
+</body>
+</html>
